@@ -9,4 +9,4 @@
 	url = https://github.com/tum-ei-eda/etiss_riscv_examples.git
 [submodule "etiss_arch_riscv"]
 	path = etiss_arch_riscv
-	url = https://github.com:tum-ei-eda/etiss_arch_riscv.git
+	url = https://github.com/tum-ei-eda/etiss_arch_riscv.git
