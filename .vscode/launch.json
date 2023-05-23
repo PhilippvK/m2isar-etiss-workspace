@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: M2-ISA-R CoreDSL Frontend",
+            "type": "python",
+            "request": "launch",
+            "module": "m2isar.frontends.coredsl2.parser",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}/M2-ISA-R",
+            "args": [
+                "${workspaceFolder}/etiss_arch_riscv/top.core_desc"
+            ]
+        },
+        {
+            "name": "Python: M2-ISA-R ETISS Backend",
+            "type": "python",
+            "request": "launch",
+            "module": "m2isar.backends.etiss.writer",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}/M2-ISA-R",
+            "args": [
+                "${workspaceFolder}/etiss_arch_riscv/gen_model/top.m2isarmodel",
+                "--separate",
+                "--static-scalars"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,145 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        // Warning: Please setup an virtual environment first!
+        {
+            "label": "M2-ISA-R: Install",
+            "detail": "TODO",
+            "type": "shell",
+            "linux": {
+                "command": "python",
+                "args": [
+                    "-m",
+                    "pip",
+                    "install",
+                    "-e",
+                    "-."
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}/M2-ISA-R"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "M2-ISA-R: Run coredsl frontend",
+            "detail": "TODO",
+            "type": "shell",
+            "linux": {
+                "command": "python",
+                "args": [
+                    "-m",
+                    "m2isar.frontends.coredsl2.parser",
+                    "${workspaceFolder}/etiss_arch_riscv/top.core_desc"
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}/M2-ISA-R"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "M2-ISA-R: Run etiss backend",
+            "detail": "TODO",
+            "type": "shell",
+            "linux": {
+                "command": "python",
+                "args": [
+                    "-m",
+                    "m2isar.backends.etiss.writer",
+                    "${workspaceFolder}/etiss_arch_riscv/gen_model/top.m2isarmodel",
+                    "--separate",
+                    "--static-scalars"
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}/M2-ISA-R"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "ETISS: Patch architectures",
+            "detail": "TODO",
+            "type": "shell",
+            "linux": {
+                "command": "bash",
+                "args": [
+                    "-c",
+                    "cp -r ${workspaceFolder}/etiss_arch_riscv/gen_output/top/* ${workspaceFolder}/etiss/ArchImpl/ && find -name '*ArchSpecificImp.cpp' -exec git restore {} \\; && find -name '*ArchSpecificImp.h' -exec git restore {} \\;"
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}/etiss"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "type": "cmake",
+            "label": "ETISS: Configure",
+            "command": "configure",
+            "problemMatcher": [],
+            "detail": "TODO"
+        },
+        {
+            "type": "cmake",
+            "label": "ETISS: Build",
+            "command": "build",
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "TODO"
+        },
+        {
+            "label": "Examples: Configure",
+            "detail": "TODO",
+            "type": "shell",
+            "linux": {
+                "command": "bash",
+                // TODO: update path of riscv gcc
+                "args": [
+                    "-c",
+                    "mkdir -p ${workspaceFolder}/etiss_riscv_examples/build && cd ${workspaceFolder}/etiss_riscv_examples/build && cmake -DCMAKE_TOOLCHAIN_FILE=$(pwd)/../rv32gc-toolchain.cmake -DRISCV_TOOLCHAIN_PREFIX=/usr/local/research/projects/SystemDesign/tools/riscv/gcc/multilib/default/ .. && cd -"
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}/etiss_riscv_examples"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Examples: Build",
+            "detail": "TODO",
+            "type": "shell",
+            "linux": {
+                "command": "cmake",
+                "args": [
+                    "--build",
+                    "${workspaceFolder}/etiss_riscv_examples/build",
+                    "-j${nproc}"
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}/etiss_riscv_examples"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Examples: Run Hello World",
+            "detail": "TODO",
+            "type": "shell",
+            "linux": {
+                "command": "${workspaceFolder}/etiss/build/bin/run_helper.sh",
+                "args": [
+                    "${workspaceFolder}/etiss_riscv_examples/build/target_code/hello_world/hello_world ",
+                    "-i${workspaceFolder}/etiss_riscv_examples/build/memsegs.ini",
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}/etiss_riscv_examples"
+                }
+            },
+            "problemMatcher": []
+        },
+
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "cmake.sourceDirectory": "${workspaceFolder}/etiss",
+    "cmake.buildDirectory": "${workspaceFolder}/etiss/build",
+    "cmake.loggingLevel": "debug",
+}
