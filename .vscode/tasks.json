@@ -5,20 +5,37 @@
     "tasks": [
         // Warning: Please setup an virtual environment first!
         {
+            "label": "Setup virtual environment",
+            "detail": "TODO",
+            "type": "shell",
+            "linux": {
+                "command": "virtualenv",
+                "args": [
+                    "-p",
+                    "python3.8",
+                    "${workspaceFolder}/venv"
+                ],
+                "options": {
+                    "cwd": "${workspaceFolder}"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "M2-ISA-R: Install",
             "detail": "TODO",
             "type": "shell",
             "linux": {
-                "command": "python",
+                "command": "${workspaceFolder}/venv/bin/python",
                 "args": [
                     "-m",
                     "pip",
                     "install",
                     "-e",
-                    "-."
+                    "${workspaceFolder}/M2-ISA-R"
                 ],
                 "options": {
-                    "cwd": "${workspaceFolder}/M2-ISA-R"
+                    "cwd": "${workspaceFolder}/M2-ISA-R",
                 }
             },
             "problemMatcher": []
@@ -28,14 +45,17 @@
             "detail": "TODO",
             "type": "shell",
             "linux": {
-                "command": "python",
+                "command": "${workspaceFolder}/venv/bin/python",
                 "args": [
                     "-m",
                     "m2isar.frontends.coredsl2.parser",
                     "${workspaceFolder}/etiss_arch_riscv/top.core_desc"
                 ],
                 "options": {
-                    "cwd": "${workspaceFolder}/M2-ISA-R"
+                    "cwd": "${workspaceFolder}/M2-ISA-R",
+                    "env": {
+                        "PYTHONPATH": "${workspaceFolder}/M2-ISA-R"
+                    }
                 }
             },
             "problemMatcher": []
@@ -45,7 +65,7 @@
             "detail": "TODO",
             "type": "shell",
             "linux": {
-                "command": "python",
+                "command": "${workspaceFolder}/venv/bin/python",
                 "args": [
                     "-m",
                     "m2isar.backends.etiss.writer",
@@ -54,7 +74,10 @@
                     "--static-scalars"
                 ],
                 "options": {
-                    "cwd": "${workspaceFolder}/M2-ISA-R"
+                    "cwd": "${workspaceFolder}/M2-ISA-R",
+                    "env": {
+                        "PYTHONPATH": "${workspaceFolder}/M2-ISA-R"
+                    }
                 }
             },
             "problemMatcher": []
