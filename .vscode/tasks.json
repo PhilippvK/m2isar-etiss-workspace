@@ -122,7 +122,7 @@
                 // TODO: update path of riscv gcc
                 "args": [
                     "-c",
-                    "mkdir -p ${workspaceFolder}/etiss_riscv_examples/build && cd ${workspaceFolder}/etiss_riscv_examples/build && cmake -DCMAKE_TOOLCHAIN_FILE=$(pwd)/../rv32gc-toolchain.cmake -DRISCV_TOOLCHAIN_PREFIX=/usr/local/research/projects/SystemDesign/tools/riscv/gcc/multilib/default/ .. && cd -"
+                    "mkdir -p ${workspaceFolder}/etiss_riscv_examples/build && cd ${workspaceFolder}/etiss_riscv_examples/build && cmake -DCMAKE_TOOLCHAIN_FILE=$(pwd)/../rv32gc-toolchain.cmake -DRISCV_TOOLCHAIN_PREFIX=/home/brandon/riscv64-unknown-elf-toolchain-10.2.0-2020.12.8-x86_64-linux-ubuntu14/ .. && cd -"
                 ],
                 "options": {
                     "cwd": "${workspaceFolder}/etiss_riscv_examples"
